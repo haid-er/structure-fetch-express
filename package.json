@@ -1,0 +1,34 @@
+{
+  "name": "strucuture-fetch-express",
+  "version": "1.0.0",
+  "description": "Practice application",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js --exec",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Malik Haider Ali",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.10.0",
+    "bcrypt": "^6.0.0",
+    "cloudinary": "^2.7.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.0.1",
+    "express": "^5.1.0",
+    "groq-sdk": "^0.26.0",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.17.0",
+    "mongoose": "^8.16.1",
+    "mongoose-aggregate-paginate-v2": "^1.1.4",
+    "multer": "^2.0.1",
+    "qs": "^6.14.0",
+    "winston": "^3.17.0",
+    "winston-daily-rotate-file": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
