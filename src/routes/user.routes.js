@@ -1,4 +1,4 @@
-const { fetchOrgChartJsonController } = require("../controllers/user.controller");
+const { fetchOrgChartJsonController, saveOrgChartDataController } = require("../controllers/user.controller");
 const {
 } = require("../validators/auth.schema");
 const { upload } = require("../middlewares/multer.middleware");
@@ -11,6 +11,8 @@ const router = require("express").Router();
 //   updateUserAvatar
 // );
 
-router.post("/fetch-json", upload.single("orgchart"), fetchOrgChartJsonController)
+router.post("/fetch-json", upload.single("orgchart"), fetchOrgChartJsonController);
+
+router.put("/save-data", saveOrgChartDataController);
 
 module.exports = router;
