@@ -72,7 +72,7 @@ Ensure strict syntax validity (parse it as JavaScript object) and correct struct
       {
         messages,
         temperature: 0,
-        max_tokens: 2048
+        max_tokens: 3072
       },
       {
         headers: {

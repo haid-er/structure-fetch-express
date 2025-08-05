@@ -19,12 +19,12 @@ const fetchOrgChartJsonController = asyncHandler(async (req, res) => {
         filePathLocal = await convertPdfToImage(filePathLocal);
 
     if (!filePathLocal)
-        throw new ApiError(STATUS_CODES.BAD_REQUEST, "Avatar file is missing");
+        throw new ApiError(STATUS_CODES.BAD_REQUEST, "Image file is missing");
     const file = await uploadOnCloudinary(filePathLocal);
     if (!file)
         throw new ApiError(
             STATUS_CODES.BAD_REQUEST,
-            "Error while uploading avatar."
+            "Error while uploading Image."
         );
 
     const extractedData = await extractHierarchyFromImage(file?.url);
@@ -36,7 +36,7 @@ const fetchOrgChartJsonController = asyncHandler(async (req, res) => {
         );
     }
     const jsonString = JSON.stringify(jsonObject);
-    const dborgChart = await OrgChart.create({
+    await OrgChart.create({
         imageKey: key,
         json: jsonString,
         imageUrl: file?.url || "",
@@ -46,7 +46,7 @@ const fetchOrgChartJsonController = asyncHandler(async (req, res) => {
         console.error("Error creating org chart:", error);
         throw new ApiError(STATUS_CODES.INTERNAL_SERVER_ERROR, "Failed to create org chart");
     });
-    console.log("😀Org chart saved to database:", dborgChart);
+
     console.log("Extracted Data:", jsonObject);
     res.status(STATUS_CODES.OK).json(
         new ApiResponse(
@@ -88,13 +88,12 @@ const saveOrgChartDataController = asyncHandler(async (req, res) => {
         json: jsonString,
         imageKey,
         imageUrl
-    }).then((orgChart) => {
-        console.log("Org chart created:", orgChart);
-    }).catch((error) => {
-        console.error("Error creating org chart:", error);
-        throw new ApiError(STATUS_CODES.INTERNAL_SERVER_ERROR, "Failed to create org chart", error.stack);
-    });
-    console.log("😀Org chart saved to database:", orgChart)
+    })
+
+    if (!orgChart) {
+        console.error("Error creating org chart:");
+        throw new ApiError(STATUS_CODES.INTERNAL_SERVER_ERROR, "Failed to create org chart");
+    }
     res.status(STATUS_CODES.OK).json(
         new ApiResponse(
             STATUS_CODES.OK,
