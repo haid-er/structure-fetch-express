@@ -14,7 +14,13 @@ const { convertPdfToImage } = require("../utils/convertPdfToImg.js");
 const fetchOrgChartJsonController = asyncHandler(async (req, res) => {
     let filePathLocal = req.file.path;
     const key = req.file.filename;
-
+    // res.status(STATUS_CODES.OK).json(
+    //     new ApiResponse(
+    //         STATUS_CODES.OK,
+    //         "Org chart JSON file fetched successfully",
+    //         { "hello": "world" }
+    //     )
+    // );
     if (key.slice(-4) == ".pdf")
         filePathLocal = await convertPdfToImage(filePathLocal);
 
